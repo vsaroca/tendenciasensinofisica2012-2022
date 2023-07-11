@@ -71,16 +71,13 @@ dsqm <- select(dsqm, id, PY, CA)
 CAdsgm <-
 dsgm %>%  unnest_tokens(word, CA)
 CAdsgm <- CAdsgm %>% anti_join(get_stopwords(language = "pt", source = "stopwords-iso"))
+CAdsgm <- CAdsgm %>% anti_join(get_stopwords(language = "en"))
 CAdsgm <- CAdsgm %>% group_by(PY)
 CAdsgmresultados <- CAdsgm  %>%  count(word, sort = TRUE)
 CAdsgmresultados <- CAdsgmresultados %>% filter(n<9)
 
 
-CAdsqm <-
-    dsqm %>%  unnest_tokens(word, CA)
-CAdsqm <- CAdsqm %>% anti_join(get_stopwords(language = "pt", source = "stopwords-iso"))
-CAdsqm <- CAdsqm %>% group_by(PY)
-CAdsqmresultados <- CAdsqm  %>%  count(word, sort = TRUE)
+
 
 
 #Export CSVs
